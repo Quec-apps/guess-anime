@@ -19,6 +19,18 @@ a++;window['q'+a] = "Cowboy Bebop";
 a++;window['q'+a] = "Neon Genesis Evangelion";
 a++;window['q'+a] = "Mob Psycho 100";
 a++;window['q'+a] = "Code Geass";
+a++;window['q'+a] = "Steins Gate";
+a++;window['q'+a] = "My Dress Up Darling";
+a++;window['q'+a] = "The Seven Deadly Sins";
+a++;window['q'+a] = "Record of Ragnarok";
+a++;window['q'+a] = "Sword Art Online";
+a++;window['q'+a] = "Fruits Basket";
+a++;window['q'+a] = "The Promised Neverland";
+a++;window['q'+a] = "High School DxD";
+a++;window['q'+a] = "Fire Force";
+a++;window['q'+a] = "Ranking of Kings";
+a++;window['q'+a] = "The Rising of the Shield Hero";
+a++;window['q'+a] = "Darling in the Franxx";
 
 
 levelTotal = a;
