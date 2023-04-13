@@ -366,7 +366,9 @@ function letterClick() {
 		if (digit == (full2Ans.length + 1)) {
 			finalCheck();
 		}
-
+		$('#ans').text(ans);
+		$('#digit').text(digit);
+		$('#totaldigit').text(totaldigit);
 	});
 
 	function replaceAt(str, index, chr) {
@@ -382,7 +384,7 @@ function letterClick() {
 
 	$(".ans-ct").click(function () {
 		ctVar = parseInt($(this).attr('id').replace("ans-ct", ""));
-		if (ctVar < digit) {
+		if (ctVar < digit && !$('#ans'+ctVar).is(':empty')) {
 			//proceed to remove letter
 			totaldigit--;
 			$("#ans" + ctVar).empty();
@@ -394,6 +396,9 @@ function letterClick() {
 		}
 		console.log(ctVar)
 		console.log($(this).text())
+		$('#ans').text(ans);
+		$('#digit').text(digit);
+		$('#totaldigit').text(totaldigit);
 	});
 
 }
