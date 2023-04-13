@@ -97,10 +97,6 @@ $(".main-img").on("load", function () {
 });
 
 $(document).ready(function () {
-	vhHeight = $(window).outerHeight();
-	fullHeight = $(".full").outerHeight();
-	calcHeight = vhHeight - fullHeight;
-	$(".letters-bg").css({ height: '' + (calcHeight - 10) });
 
 	Inter = localStorage.getItem('Inter');
 	$('.back-img, .home, .retry, .next').click(function () {
@@ -297,6 +293,11 @@ function AppenAll() {
 	}
 
 	MainShuffle();
+
+	vhHeight = $(window).outerHeight();
+	fullHeight = $(".full").outerHeight();
+	calcHeight = vhHeight - fullHeight;
+	$(".letters-bg").css({ height: '' + (calcHeight - 10) });
 
 }
 AppenAll();
