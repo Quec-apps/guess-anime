@@ -248,6 +248,12 @@ break {
 	transition: all .4s ease;
 	animation: intro .4s ease-in 1;
 }
+.empty-ct {
+	width: 7vw;
+	max-width: 35px;
+	height: 7vw;
+	max-height: 35px;
+}
 
 .main-img-bg {
 	transform-origin: 50% 50%;
@@ -447,12 +453,12 @@ break {
 
 .hint-bg-top {
 	width: 100vw;
-	height: 60vh;
+	height: 50vh;
 }
 
 .hint-bg {
 	width: 100%;
-	height: 40vh;
+	height: 50vh;
 	background-image: linear-gradient(90deg, #f7d15e, #f7ad5e);
 	transition: all 350ms ease;
 	border-radius: 10vw 10vw 0 0;
