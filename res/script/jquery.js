@@ -227,12 +227,6 @@ function AppenAll() {
 	`);
 	}
 
-	for (let ab = 1; ab <= full2Ans.length; ab++) {
-		$('.hint-append').append(`
-	<div class="answer-ct answer-ct${ab}"><div class="ans2" id="hintct${ab}"></div></div>
-	`);
-	}
-
 	for (let ac = 1; ac <= full2Ans.length; ac++) {
 		$('.letters-bg').append(`
 	<div class="letter-ct" id="ct${ac}"></div>
@@ -550,9 +544,37 @@ $(".main-img").click(function () {
 });
 
 $(window).resize(function () { 
-	console.log('window size changed!!');
 	vhHeight = $(window).outerHeight();
 	fullHeight = $(".full").outerHeight();
 	calcHeight = vhHeight - fullHeight;
 	$(".letters-bg").css({ height: '' + (calcHeight - 10) });
-});
+
+	CheckOrien();
+ });
+
+function CheckOrien() {
+	if(window.innerHeight  > window.innerWidth){
+		//portrait
+		$('#orien').empty();
+	} else {
+		//landscape
+		$('#orien').empty();
+		$('#orien').append(`
+		.letters-bg {
+			width: 40%;
+			height: 100vh !important;
+		}
+	
+		.main-img-bg {
+			height: 40vh;
+		}
+	
+		.full {
+			width: 60%;
+			height: 100vh;
+		}
+		`);
+
+	}
+}
+CheckOrien();
