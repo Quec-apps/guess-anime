@@ -131,23 +131,34 @@
 			opacity: .6 !important;
 		}
 
-		.ct-main-img{
+		.ct-main-img {
 			width: 200px;
 			/* height: 60px; */
 			position: absolute;
 			top: -70%;
 			left: -5%;
 		}
+
 		.ct-main-img2 {
 			width: 110px;
 			position: absolute;
 			top: -65%;
 			left: 70%;
 			animation: ct-img2 2s ease infinite;
-		} @keyframes ct-img2 {
-			0% {transform: translateY(0);}
-			50% {transform: translateY(5px);}
-			100% {transform: translateY(0px);}
+		}
+
+		@keyframes ct-img2 {
+			0% {
+				transform: translateY(0);
+			}
+
+			50% {
+				transform: translateY(5px);
+			}
+
+			100% {
+				transform: translateY(0px);
+			}
 		}
 
 		.ct-img {
@@ -264,14 +275,16 @@
 		.luffy-img {
 			width: 90px;
 			height: 90px;
-			position: fixed;
-			top: 80%;
-			left: 70%;
+			position: absolute;
+			top: -144%;
+			left: 77%;
 			transform-origin: center;
-			animation: luffy 1s ease infinite;
+			opacity: 0;
+			transition: all .6s ease;
+			animation: ct-img2 3s ease infinite;
 		}
 
-		@keyframes luffy {
+		/* @keyframes luffy {
 			0% {
 				transform: translateY(0) rotate(0deg);
 			}
@@ -283,12 +296,11 @@
 			100% {
 				transform: translateY(0) rotate(0deg);
 			}
-		}
+		} */
 	</style>
 </head>
 
 <body>
-	<img src="res/image/luffy.png" class="luffy-img">
 	<div class="mid">
 		<div class="coins">
 			<img src="res/image/coins.webp" class="coins-img">
@@ -298,8 +310,6 @@
 			<div class="coffee-txt">Support me!</div>
 			<img src="res/image/coffee.webp" class="coffee-img">
 		</div>
-		<!-- <div class="special-bg">
-		</div> -->
 	</div>
 
 	<div class="ct-bg">
@@ -334,6 +344,7 @@
 				transition: all 350ms ease;
 				animation: feedback 1s ease-in 1;
 				font-weight: 500;
+				position: relative;
 			}
 
 			.rate-bg:active {
@@ -341,13 +352,17 @@
 				opacity: .5;
 			}
 		</style>
-		<div class="rate-bg">Rate us on Google play store</div>
+		<div class="rate-bg">
+			Rate us on Google play store
+			<img src="res/image/luffy.png" class="luffy-img">
+
+		</div>
 
 	</div><!--ct-bg closed-->
 	<audio id="button2" src="res/audio/button2.mp3"></audio>
 	<script src="anime/anime.js"></script>
 	<script>
-		setTimeout(function () { $('.coffee-img, .coins, .feedback, .special-bg').css({ opacity: '1' }); }, 200);
+		setTimeout(function () { $('.coffee-img, .coins, .feedback, .special-bg, .luffy-img').css({ opacity: '1' }); }, 200);
 		setTimeout(function () { $('.ct1').css({ 'transform': 'scale(1)', 'opacity': '1' }); }, 100);
 		setTimeout(function () { $('.ct2').css({ 'transform': 'scale(1)', 'opacity': '1' }); }, 200);
 		setTimeout(function () { $('.ct3').css({ 'transform': 'scale(1)', 'opacity': '1' }); }, 300);
@@ -355,7 +370,7 @@
 		setTimeout(function () { $('.ct5').css({ 'transform': 'scale(1)', 'opacity': '1' }); }, 500);
 
 		function FullHide() {
-			setTimeout(function () { $('.coffee-img, .coins, .feedback, .rate-bg, .buy-bg, .ad-bg, .special-bg, .ad-class').css({ opacity: '0' }); }, 200);
+			setTimeout(function () { $('.coffee-img, .coins, .feedback, .rate-bg, .buy-bg, .ad-bg, .special-bg, .ad-class, .luffy-img').css({ opacity: '0' }); }, 200);
 			setTimeout(function () { $('.ct1').css({ 'transform': 'scale(1.2)', 'opacity': '0' }); }, 100);
 			setTimeout(function () { $('.ct2').css({ 'transform': 'scale(1.2)', 'opacity': '0' }); }, 200);
 			setTimeout(function () { $('.ct3').css({ 'transform': 'scale(1.2)', 'opacity': '0' }); }, 300);
@@ -374,7 +389,7 @@
 		}
 
 		if (localStorage.getItem("aCoins") === null) {
-			var coins = 1000;
+			var coins = 10;
 			localStorage.setItem("aCoins", coins);
 			location.reload();
 		} else {
