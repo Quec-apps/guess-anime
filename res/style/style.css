@@ -122,7 +122,7 @@ break {
 	top: 0;
 	z-index: 11;
 	width: 100%;
-	max-width: 500px;
+	/* max-width: 500px; */
 }
 
 .main-img-bg {
@@ -197,14 +197,13 @@ break {
 
 .letters-bg {
 	width: 100%;
-	max-width: 500px;
+	/* max-width: 500px; */
 	overflow-x: hidden;
 	overflow-y: scroll;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	align-items: center;
-	align-content: baseline;
+	align-content: center;
 	position: relative;
 	z-index: 10;
 	transform: scale(1.2);
@@ -662,6 +661,7 @@ break {
 
 	/*Laptops*/
 	.letters-bg {
+		width: 40%;
 		height: 100vh !important;
 	}
 
@@ -670,6 +670,7 @@ break {
 	}
 
 	.full {
+		width: 60%;
 		height: 100vh;
 	}
 }
