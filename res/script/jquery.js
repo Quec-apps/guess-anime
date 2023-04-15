@@ -556,6 +556,9 @@ function CheckOrien() {
 	if(window.innerHeight  > window.innerWidth){
 		//portrait
 		$('#orien').empty();
+		vhHeight = $(window).outerHeight();
+		fullHeight = $(".full").outerHeight();
+		calcHeight = vhHeight - fullHeight;
 		$(".letters-bg").css({ height: '' + (calcHeight - 10) });
 	} else {
 		//landscape
