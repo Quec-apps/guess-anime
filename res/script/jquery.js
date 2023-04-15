@@ -548,3 +548,11 @@ $(".main-img").click(function () {
 		$(".main-img").css({ maxWidth: '85vw', maxHeight: '30vh' });
 	}
 });
+
+$(window).resize(function () { 
+	console.log('window size changed!!');
+	vhHeight = $(window).outerHeight();
+	fullHeight = $(".full").outerHeight();
+	calcHeight = vhHeight - fullHeight;
+	$(".letters-bg").css({ height: '' + (calcHeight - 10) });
+});
