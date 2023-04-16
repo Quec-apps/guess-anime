@@ -121,16 +121,9 @@ $(document).ready(function () {
 
 
 	$('.skip').click(function () {
-		setTimeout(() => {
-			$('.hint-bg-bg').fadeOut();
-			$(".hint-bg").css({ transform: 'translateY(20%)', opacity: '0' });
-		}, 100);
-		setTimeout(() => { $(".hint-bg").css({ transform: 'translateY(0)', opacity: '1' }); }, 450);
 		if (coins < 10) {
 			document.getElementById("button3").play();
 			$('.out-coins-con').css({ display: 'flex' });
-			setTimeout(function () { $('.hint-bg-bg').fadeOut(); }, 100);
-			setTimeout(function () { $('.hint-bg').css({ top: '0' }); }, 400);
 		} else {
 			typedAns = '';
 			typedAnsNumbers = [];
@@ -142,7 +135,6 @@ $(document).ready(function () {
 			$("#coins").html(coins);
 			$('.finish-con').css({ display: 'flex' });
 			$('.score2').fadeOut(0);
-			$('.hint-bg-bg').fadeOut();
 			Levelfunct();
 		}
 	});
@@ -243,29 +235,29 @@ function AppenAll() {
 	breakNum = [];
 	for (i in fullAns) {
 		if (fullAns[i] == ' ') {
-			breakNum.push(parseInt(i)+1);
+			breakNum.push(parseInt(i) + 1);
 		}
 	}
 
-	count=0;
-	singleLine=0;
-	for (ws in splittedAns) {
+	count = 0;
+	singleLine = 0;
+	for (ws in (splittedAns)) {
 		ws = parseInt(ws);
-		count+=splittedAns[ws].length;
-		singleLine+=splittedAns[ws].length;
+		count += splittedAns[ws].length;
+		singleLine += splittedAns[ws].length;
 		if (splittedAns[ws].length < 9 && singleLine < 10) {
 			if (parseInt(ws) == (splittedAns.length - 1)) {
 				singleLine++;
-				$("<div class='empty-ct'></div>").insertAfter(".answer-ct" + count);
-			} else if (splittedAns[(ws+1)].length < (11 - singleLine)) {
+				// $("<div class='empty-ct'></div>").insertAfter(".answer-ct" + count);
+			} else if (splittedAns[(ws + 1)].length < (11 - singleLine)) {
 				singleLine++;
 				$("<div class='empty-ct'></div>").insertAfter(".answer-ct" + count);
 			} else {
-				singleLine=0;
+				singleLine = 0;
 				$("<break></break>").insertAfter(".answer-ct" + count);
 			}
 		} else {
-			singleLine=0;
+			singleLine = 0;
 			$("<break></break>").insertAfter(".answer-ct" + count);
 		}
 
@@ -288,25 +280,25 @@ function AppenAll() {
 		hint = parseInt(localStorage.getItem("animeHint"));
 	}
 
-	
+
 	function AppendHint() {
 		if (hint > 0) {
 			for (let hi = 0; hi <= hint; hi++) {
 				$("#ans" + hi).html(full2Ans.charAt(hi - 1));
-				$("#ans-ct"+hi).css({backgroundColor:'green', color:'white'});
+				$("#ans-ct" + hi).css({ backgroundColor: 'green', color: 'white' });
 			}
-			for (i=0; i < hint; i++) {
+			for (i = 0; i < hint; i++) {
 				typedAns += full2Ans[i];
 				console.log(hint);
-				typedAnsNumbers.push(i+1);
-				$("#ct"+(i+1)).css({visibility:'hidden'});
+				typedAnsNumbers.push(i + 1);
+				$("#ct" + (i + 1)).css({ visibility: 'hidden' });
 			}
 		}
 	}
 	AppendHint();
 
-	digit = hint+1;
-	totaldigit = hint+1;
+	digit = hint + 1;
+	totaldigit = hint + 1;
 
 	if (hint == full2Ans.length - 1) {
 		$(".show-hint").css({ visibility: 'hidden' });
@@ -329,8 +321,8 @@ $('.clear-all').click(function () {
 	hint = parseInt(hint);
 	$(".ans").empty();
 	ans = 0;
-	digit = hint+1;
-	totaldigit = hint+1;
+	digit = hint + 1;
+	totaldigit = hint + 1;
 	typedAns = '';
 	typedAnsNumbers = [];
 
@@ -339,17 +331,17 @@ $('.clear-all').click(function () {
 	});
 	//Appending hint
 	if (hint > 0) {
-			for (let hi = 0; hi <= hint; hi++) {
-				$("#ans" + hi).html(full2Ans.charAt(hi - 1));
-				$("#ans-ct"+hi).css({backgroundColor:'green', color:'white'});
-			}
-			for (i=0; i < hint; i++) {
-				typedAns += full2Ans[i];
-				console.log(hint);
-				typedAnsNumbers.push(i+1);
-				$("#ct"+(i+1)).css({visibility:'hidden'});
-			}
+		for (let hi = 0; hi <= hint; hi++) {
+			$("#ans" + hi).html(full2Ans.charAt(hi - 1));
+			$("#ans-ct" + hi).css({ backgroundColor: 'green', color: 'white' });
 		}
+		for (i = 0; i < hint; i++) {
+			typedAns += full2Ans[i];
+			console.log(hint);
+			typedAnsNumbers.push(i + 1);
+			$("#ct" + (i + 1)).css({ visibility: 'hidden' });
+		}
+	}
 });
 
 function readyFunction() {
@@ -392,9 +384,9 @@ function letterClick() {
 		full2Ans = fullAns.replace(/ /g, "").toUpperCase();
 
 		document.getElementById("button").play();
-		console.log('totaldigit',totaldigit)
-		console.log('full2Ans.length',full2Ans.length)
-		if ((totaldigit-1) >= full2Ans.length) {
+		console.log('totaldigit', totaldigit)
+		console.log('full2Ans.length', full2Ans.length)
+		if ((totaldigit - 1) >= full2Ans.length) {
 			return
 		}
 
@@ -470,7 +462,7 @@ function finalCheck() {
 			} else {
 				$('.game-over-con').css({ display: 'flex' });
 				document.getElementById("over").play();
-				if (coins > 0) {coins--;}
+				if (coins > 0) { coins--; }
 			}
 			localStorage.aCoins = coins;
 			$("#coins").html(coins);
@@ -478,7 +470,26 @@ function finalCheck() {
 	}, 200);
 }
 
-if (localStorage.Inter == 'NaN' || localStorage.Inter == NaN) {localStorage.Inter = 1;}
+if (localStorage.Inter == 'NaN' || localStorage.Inter == NaN) { localStorage.Inter = 1; }
+
+audioElement = document.getElementById('hint');
+playCount = 0;
+function HintPlay() {
+	$('body').append(`<audio id="hint${playCount}" src="../res/audio/hint.mp3"></audio>`)
+	// audioElement.addEventListener("loadedmetadata", function(_event) {
+
+	// });
+	document.getElementById("hint" + playCount).play();
+	duration = audioElement.duration;
+	console.log('duration', duration)
+	function TmpFunc(_tmp) {
+		setTimeout(() => {
+			$('#hint' + _tmp).remove();
+		}, duration*1000);
+	}
+	TmpFunc(playCount);
+	playCount++;
+}
 
 $('.show-hint').click(function () {
 	fullAns = window['q' + levels];
@@ -490,10 +501,10 @@ $('.show-hint').click(function () {
 		setTimeout(function () { $('.hint-bg-bg').fadeOut(); }, 100);
 		setTimeout(function () { $('.hint-bg').css({ top: '0' }); }, 400);
 	} else {
-		document.getElementById("hint").play();
+		HintPlay();
 		hint++; localStorage.setItem("animeHint", hint);
-		$("#ans-ct" + hint).css({backgroundColor:'green', color:'white'});
-		$("#ct"+hint).css({visibility:'hidden'});
+		$("#ans-ct" + hint).css({ backgroundColor: 'green', color: 'white' });
+		$("#ct" + hint).css({ visibility: 'hidden' });
 		//check if showing hint is empty
 		if ($('#ans' + hint).is(':empty')) {
 			//its empty
@@ -505,29 +516,29 @@ $('.show-hint').click(function () {
 				}
 			}
 			if (previousLetterIndex != null) {
-				typedAns = replaceAt(typedAns, previousLetterIndex, full2Ans[hint-1]);
+				typedAns = replaceAt(typedAns, previousLetterIndex, full2Ans[hint - 1]);
 			} else {
-				typedAns+=full2Ans[hint-1];
+				typedAns += full2Ans[hint - 1];
 				digit++;
 			}
 			typedAnsNumbers.push(hint);
 			totaldigit++;
 		} else {
-			if (typedAnsNumbers[hint-1] != hint) {
+			if (typedAnsNumbers[hint - 1] != hint) {
 				//typed ans & hint ans are NOT same
-				$('#ct'+typedAnsNumbers[hint-1]).css({visibility:'visible'});
+				$('#ct' + typedAnsNumbers[hint - 1]).css({ visibility: 'visible' });
 			}
-			typedAns = replaceAt(typedAns, hint-1, full2Ans[hint-1]);
-			typedAnsNumbers[hint-1] = hint;
+			typedAns = replaceAt(typedAns, hint - 1, full2Ans[hint - 1]);
+			typedAnsNumbers[hint - 1] = hint;
 		}
 		$("#ans" + hint).html(window["ct" + hint]);
 		// typedAns = replaceAt(typedAns, (hint-1), full2Ans[hint-1]);
-		console.log('typedAns',typedAns)
+		console.log('typedAns', typedAns)
 		coins--; localStorage.setItem("aCoins", coins);
 		$("#coins").html(coins);
 
-		if (hint == full2Ans.length - 2) {
-			$(".show-hint").css({ visibility: 'hidden' });
+		if (hint == full2Ans.length) {
+			finalCheck();
 		}
 	}
 });
@@ -543,17 +554,17 @@ $(".main-img").click(function () {
 	}
 });
 
-$(window).resize(function () { 
+$(window).resize(function () {
 	vhHeight = $(window).outerHeight();
 	fullHeight = $(".full").outerHeight();
 	calcHeight = vhHeight - fullHeight;
 	$(".letters-bg").css({ height: '' + (calcHeight - 10) });
 
 	CheckOrien();
- });
+});
 
 function CheckOrien() {
-	if(window.innerHeight  > window.innerWidth){
+	if (window.innerHeight > window.innerWidth) {
 		//portrait
 		$('#orien').empty();
 		vhHeight = $(window).outerHeight();

@@ -75,8 +75,10 @@ break {
 	height: 50px;
 	transform: scale(1.2);
 	opacity: 0;
-} .back-img:active {
-	transform: scale(.9)!important;
+}
+
+.back-img:active {
+	transform: scale(.9) !important;
 }
 
 .coins {
@@ -154,26 +156,32 @@ break {
 	z-index: 1;
 	display: none;
 }
+
 .play-aud {
 	visibility: hidden;
 }
+
 .loading-txt {
 	position: absolute;
-	top: 50%; left: 50%;
-	transform: translate(-50%,-50%);
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	z-index: 0;
 }
+
 .sound-img {
 	width: 60px;
 	height: 60px;
 	padding: 30px;
-	background: rgb(247,247,247);
-	background: linear-gradient(90deg, rgba(247,247,247,1) 0%, rgba(227,227,227,1) 100%);
+	background: rgb(247, 247, 247);
+	background: linear-gradient(90deg, rgba(247, 247, 247, 1) 0%, rgba(227, 227, 227, 1) 100%);
 	border-radius: 15px;
 	box-shadow: 3px 5px 2px rgba(0, 0, 0, .4);
-} .sound-img:active {
+}
+
+.sound-img:active {
 	transform: translate(2px, 2px);
-	box-shadow:inset 3px 5px 2px rgba(0, 0, 0, .4);
+	box-shadow: inset 3px 5px 2px rgba(0, 0, 0, .4);
 	opacity: .8;
 }
 
@@ -212,20 +220,20 @@ break {
 }
 
 .letter-ct {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-transform: uppercase;
-    width: 12px;
-    height: 12px;
-    padding: 15px 15px;
-    font-size: larger;
-    text-align: center;
-    border-radius: 10px;
-    background: linear-gradient(90deg, #ec6033 0%, #d13925 100%);
-    color: white;
-    box-shadow: 0px 0px 7px #00000024;
-    margin: 2px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	text-transform: uppercase;
+	width: 12px;
+	height: 12px;
+	padding: 15px 15px;
+	font-size: larger;
+	text-align: center;
+	border-radius: 10px;
+	background: linear-gradient(90deg, #ec6033 0%, #d13925 100%);
+	color: white;
+	box-shadow: 0px 0px 7px #00000024;
+	margin: 2px;
 }
 
 .answer-ct {
@@ -243,10 +251,11 @@ break {
 	border-radius: 5px;
 	background-color: white;
 	color: #062737;
-	box-shadow:  0 0 5px rgba(0, 0, 0, 0.241);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.241);
 	transition: all .4s ease;
 	animation: intro .4s ease-in 1;
 }
+
 .empty-ct {
 	width: 7vw;
 	max-width: 35px;
@@ -271,6 +280,7 @@ break {
 		opacity: 1;
 	}
 }
+
 .disclaimer-txt {
 	position: absolute;
 	top: 10px;
@@ -280,7 +290,9 @@ break {
 	color: white;
 	text-decoration: underline dotted white;
 	z-index: 10;
-} .disclaimer-txt:active {
+}
+
+.disclaimer-txt:active {
 	opacity: .6;
 }
 
@@ -400,12 +412,15 @@ break {
 	transition: all 400ms ease;
 }
 
-.hint, .skip-img {
+.hint,
+.skip-img {
 	width: 14vw;
 	height: 14vw;
 	max-width: 80px;
 	max-height: 80px;
-} .skip-img:active {
+}
+
+.skip-img:active {
 	transform: scale(.9);
 }
 
@@ -463,10 +478,10 @@ break {
 }
 
 .out-coins {
-	padding: 4vw;
-	width: 70vw;
+	padding: 30px;
+	width: 70%;
+	max-width: 400px;
 	background: linear-gradient(90deg, #ec6033 0%, #d13925 100%);
-	border-radius: 3vw;
 	border-radius: 10px;
 	animation: out-coins 400ms ease 1;
 	transition: all 400ms ease;
@@ -494,7 +509,7 @@ break {
 .out-coins-ti {
 	width: 100%;
 	text-align: center;
-	font-size: 6vw;
+	font-size: x-large;
 	padding-top: 3vh;
 	color: white;
 }
@@ -503,16 +518,8 @@ break {
 	width: 100%;
 	text-align: center;
 	margin-top: 5vw;
-	font-size: 5vw;
+	font-size: large;
 	color: white;
-}
-
-.out-coins-ct2 {
-	width: 100%;
-	text-align: center;
-	margin-top: 5vw;
-	font-size: 5vw;
-	display: none;
 }
 
 .out-coins-btn-bg {
@@ -555,7 +562,7 @@ break {
 	border-radius: 10px;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-around;
 	align-items: center;
 	transition: all 400ms ease;
 	animation: buy-coins-bg 400ms ease 1;
@@ -574,35 +581,36 @@ break {
 }
 
 .buy-coins-ct {
-	width: 80vw;
-	height: 15vw;
+	width: 90%;
+	max-width: 600px;
+	margin-top: 10px;
+	padding: 5px 0;
 	background: linear-gradient(90deg, #ec6033 0%, #d13925 100%);
 	border-radius: 10px;
-	box-shadow: 0px 0px 8px #9e6a6a;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
 .ct-sub-bg {
-	width: 32vw;
+	width: 40%;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
-	font-size: 6vw;
+	font-size: large;
 	color: white;
 }
 
 .hint-img {
-	width: 10vw;
-	height: 10vw;
+	width: 30px;
+	height: 30px;
 }
 
 .buy {
-	width: 20vw;
-	height: 11vw;
+	width: 90px;
+	padding: 6px 0;
 	transform: translateX(-4.7vw);
-	background-color: #f5ebea;
+	background-color: white;
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
@@ -620,8 +628,8 @@ break {
 }
 
 .video-img {
-	width: 6vw;
-	height: 6vw;
+	width: 20px;
+	height: 20px;
 }
 
 .clear-all:active {
