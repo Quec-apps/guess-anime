@@ -335,6 +335,7 @@
         .earn-txt {
             font-size: 25px;
             margin-left: 8px;
+            color: green;
         }
         .claim-btn {
             width: 90%;
@@ -461,6 +462,7 @@
                     } else {
                         reward = (Math.floor(Math.random() * 4)) + 1
                     }
+                    console.log('reward', reward)
                     coins += parseInt(reward);
                     localStorage.aCoins = coins;
                     $("#coins").text(coins);
@@ -487,7 +489,7 @@
         }
 
         setInterval(() => {
-            coins = localStorage.aCoins; $("#coins").html(coins);
+            coins = parseInt(localStorage.aCoins); $("#coins").html(coins);
             bought_coins = parseInt(localStorage.anime_bought_coins);
             UpdateBoughtCoin();
         }, 2500);
