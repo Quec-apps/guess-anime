@@ -62,6 +62,36 @@
 			color: #062737;
 			padding-bottom: 4vh;
 		}
+
+		.main-img-con {
+			position: relative;
+		}
+
+		.tile-bg {
+			position: absolute;
+			top: 0; left: 0;
+			display: flex;
+			/* flex-direction: column; */
+			flex-wrap: wrap;
+			overflow: hidden;
+		}
+		.tile {
+			/* flex: 1 0 calc(33.33% - 20px);
+			width: 40px;
+			height: 40px; */
+			background: linear-gradient(90deg, rgb(229 67 40) 0%, rgb(169 48 27) 100%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		.tile-coin-bg {
+			color: white;
+			font-size: small;
+		}
+		.tile-coin-img {
+			width: 9px;
+			height: 9px;
+		}
 	</style>
 	<style id="orien"></style>
 	<div class="full-error">
@@ -120,7 +150,10 @@
 
 		<div class="main-img-bg">
 			<div class="loading-txt">Loading...</div>
-			<img src="" class="main-img">
+			<div class="main-img-con">
+				<img src="" class="main-img">
+				<div class="tile-bg"></div>
+			</div>
 			<div class="img-error">
 				<div class="img-error-txt">Failed to load Image</div>
 				<div class="img-error-btn">RELOAD</div>
