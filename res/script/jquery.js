@@ -19,24 +19,6 @@ function Levelfunct() {
 	localStorage.setItem("animeLevels", levels);
 }
 
-$('.next').click(function () {
-	if (levels <= total) {
-		$(".show-hint").css({ visibility: 'visible' });
-		typedAns = '';
-		typedAnsNumbers = [];
-		$(".letters-bg").empty();
-		$(".answer-bg").empty();
-		ans = 0;
-		digit = 1;
-		totaldigit = 1;
-		setTimeout(() => {
-			Intro();
-			AppenAll();
-		}, 600);
-	} else { window.history.back(); }
-});
-
-
 var ans = 0;
 var digit = 1;
 var totaldigit = 1;
@@ -99,10 +81,199 @@ $(".main-img").on("load", function () {
 	$(".main-img").fadeIn();
 });
 
+tile_cost = 1;
+
+if (localStorage.animeMovieTileList == null) {
+	tile_list = []
+	localStorage.animeMovieTileList = JSON.stringify(tile_list);
+}
+
+tile_list = JSON.parse(localStorage.animeMovieTileList);
+console.log(tile_list);
+
+function TileClick(id_) {
+	if (coins >= tile_cost) {
+		$('#tile'+id_).css({visibility:'hidden'});
+		tile_list.push(id_)
+		localStorage.animeMovieTileList = JSON.stringify(tile_list);
+		console.log('tileList', tile_list)
+		coins-=tile_cost;
+		$("#coins").text(coins);
+		localStorage.setItem('aCoins', coins);
+	}
+}
+
 $(document).ready(function () {
 
+	function TileAppend() {
+		$(".tile").off();
+
+		for (i=0; i<=60; i++) {
+			$(".tile-bg").append(`<div id="tile${i}" onclick="TileClick(${i})" class="tile"><div class="tile-coin-bg"><img src="../res/image/coins.webp" class="tile-coin-img">1</div></div>`)
+		}
+
+		for (i in tile_list) {
+			$('#tile'+tile_list[i]).css({visibility:'hidden'});
+		}
+	}
+
+	function AppenAll() {
+		fullAns = window['q' + levels];
+		full2Ans = fullAns.replace(/ /g, "").toUpperCase();
+		whiteSpace = 0;
+		$(".tile").css({visibility:'visible'});
+
+		$("#ans-txt").html(fullAns);
+		$("#main-levels").text(' ' + levels);
+	
+		$(".main-img").fadeOut();
+		$(".loading-txt").fadeIn();
+	
+		$(".main-img").attr('src', 'images/' + levels + '.webp');
+	
+		img = $(".main-img");
+	
+			img.on('load', function() {
+				// Get image width and height
+				width = img.width();
+				height = img.height();
+	
+				$(".tile-bg").css({width:width, height:height});
+	
+				TileAppend();
+
+				$(".tile").css({width:width/7, height:width/7})
+	
+				// Display the dimensions
+				console.log("Width: " + width + "px");
+				console.log("Height: " + height + "px");
+			});
+	
+		for (let aa = 1; aa <= full2Ans.length; aa++) {
+			$('.main-answer-bg').append(`
+		<div class="answer-ct ans-ct answer-ct${aa}" id="ans-ct${aa}"><div class="ans" id="ans${aa}"></div></div>
+		`);
+		}
+	
+		for (let ac = 1; ac <= full2Ans.length; ac++) {
+			$('.letters-bg').append(`
+		<div class="letter-ct" id="ct${ac}"></div>
+		`);
+	
+			if (ac == full2Ans.length) {
+				readyFunction();
+			}
+		}
+	
+		splittedAns = fullAns.split(' ');
+		whiteSpace = splittedAns.length - 1;
+		older = NaN;
+		breakNum = [];
+		for (i in fullAns) {
+			if (fullAns[i] == ' ') {
+				breakNum.push(parseInt(i) + 1);
+			}
+		}
+	
+		count = 0;
+		singleLine = 0;
+		for (ws in (splittedAns)) {
+			ws = parseInt(ws);
+			count += splittedAns[ws].length;
+			singleLine += splittedAns[ws].length;
+			if (splittedAns[ws].length < 9 && singleLine < 10) {
+				if (parseInt(ws) == (splittedAns.length - 1)) {
+					singleLine++;
+					// $("<div class='empty-ct'></div>").insertAfter(".answer-ct" + count);
+				} else if (splittedAns[(ws + 1)].length < (11 - singleLine)) {
+					singleLine++;
+					$("<div class='empty-ct'></div>").insertAfter(".answer-ct" + count);
+				} else {
+					singleLine = 0;
+					$("<break></break>").insertAfter(".answer-ct" + count);
+				}
+			} else {
+				singleLine = 0;
+				$("<break></break>").insertAfter(".answer-ct" + count);
+			}
+	
+		}
+		ansLength = fullAns.length - whiteSpace;
+	
+		for (let a = 0; a < full2Ans.length; a++) {
+			window["ct" + (a + 1)] = full2Ans.charAt(a);
+			window["hintct" + (a + 1)] = full2Ans.charAt(a);
+			$("#ct" + (a + 1)).html(full2Ans[a]);
+	
+			if (a == (full2Ans.length - 1)) {
+				letterClick();
+			}
+		}
+	
+		if (localStorage.getItem("animeHint") == null) {
+			hint = 0; localStorage.setItem("animeHint", hint);
+		} else {
+			hint = parseInt(localStorage.getItem("animeHint"));
+		}
+	
+	
+		function AppendHint() {
+			if (hint > 0) {
+				for (let hi = 0; hi <= hint; hi++) {
+					$("#ans" + hi).html(full2Ans.charAt(hi - 1));
+					$("#ans-ct" + hi).css({ backgroundColor: 'green', color: 'white' });
+				}
+				for (i = 0; i < hint; i++) {
+					typedAns += full2Ans[i];
+					console.log(hint);
+					typedAnsNumbers.push(i + 1);
+					$("#ct" + (i + 1)).css({ visibility: 'hidden' });
+				}
+			}
+		}
+		AppendHint();
+	
+		digit = hint + 1;
+		totaldigit = hint + 1;
+	
+		if (hint == full2Ans.length - 1) {
+			$(".show-hint").css({ visibility: 'hidden' });
+		}
+	
+		MainShuffle();
+	
+		vhHeight = $(window).outerHeight();
+		fullHeight = $(".full").outerHeight();
+		calcHeight = vhHeight - fullHeight;
+		$(".letters-bg").css({ height: '' + (calcHeight - 10) });
+	
+	}
+	AppenAll();
+
+	$('.next').click(function () {
+		if (levels <= total) {
+			$(".show-hint").css({ visibility: 'visible' });
+			typedAns = '';
+			typedAnsNumbers = [];
+			$(".letters-bg").empty();
+			$(".answer-bg").empty();
+			ans = 0;
+			digit = 1;
+			totaldigit = 1;
+			setTimeout(() => {
+				Intro();
+				AppenAll();
+			}, 600);
+		} else { window.history.back(); }
+	});
+
+	isAdRemoved = parseInt(localStorage.anime_isAdRemoved);
 	Inter = localStorage.getItem('Inter');
 	$('.back-img, .home, .retry, .next').click(function () {
+		if (isAdRemoved == 1) {
+			// Inter is Removed
+			return
+		}
 		if (Inter > 4) {
 			Inter = 0;
 			localStorage.setItem('Inter', 0);
@@ -136,6 +307,10 @@ $(document).ready(function () {
 			$('.finish-con').css({ display: 'flex' });
 			$('.score2').fadeOut(0);
 			Levelfunct();
+
+			$(".tile").css({visibility:'hidden'});
+			tile_list = []
+			localStorage.animeMovieTileList = JSON.stringify(tile_list);
 		}
 	});
 
@@ -201,118 +376,6 @@ $(document).ready(function () {
 	//answers
 });
 
-function AppenAll() {
-	fullAns = window['q' + levels];
-	full2Ans = fullAns.replace(/ /g, "").toUpperCase();
-	whiteSpace = 0;
-	$("#ans-txt").html(fullAns);
-	$("#main-levels").text(' ' + levels);
-
-	$(".main-img").fadeOut();
-	$(".loading-txt").fadeIn();
-
-	$(".main-img").attr('src', 'images/' + levels + '.webp');
-
-	for (let aa = 1; aa <= full2Ans.length; aa++) {
-		$('.main-answer-bg').append(`
-	<div class="answer-ct ans-ct answer-ct${aa}" id="ans-ct${aa}"><div class="ans" id="ans${aa}"></div></div>
-	`);
-	}
-
-	for (let ac = 1; ac <= full2Ans.length; ac++) {
-		$('.letters-bg').append(`
-	<div class="letter-ct" id="ct${ac}"></div>
-	`);
-
-		if (ac == full2Ans.length) {
-			readyFunction();
-		}
-	}
-
-	splittedAns = fullAns.split(' ');
-	whiteSpace = splittedAns.length - 1;
-	older = NaN;
-	breakNum = [];
-	for (i in fullAns) {
-		if (fullAns[i] == ' ') {
-			breakNum.push(parseInt(i) + 1);
-		}
-	}
-
-	count = 0;
-	singleLine = 0;
-	for (ws in (splittedAns)) {
-		ws = parseInt(ws);
-		count += splittedAns[ws].length;
-		singleLine += splittedAns[ws].length;
-		if (splittedAns[ws].length < 9 && singleLine < 10) {
-			if (parseInt(ws) == (splittedAns.length - 1)) {
-				singleLine++;
-				// $("<div class='empty-ct'></div>").insertAfter(".answer-ct" + count);
-			} else if (splittedAns[(ws + 1)].length < (11 - singleLine)) {
-				singleLine++;
-				$("<div class='empty-ct'></div>").insertAfter(".answer-ct" + count);
-			} else {
-				singleLine = 0;
-				$("<break></break>").insertAfter(".answer-ct" + count);
-			}
-		} else {
-			singleLine = 0;
-			$("<break></break>").insertAfter(".answer-ct" + count);
-		}
-
-	}
-	ansLength = fullAns.length - whiteSpace;
-
-	for (let a = 0; a < full2Ans.length; a++) {
-		window["ct" + (a + 1)] = full2Ans.charAt(a);
-		window["hintct" + (a + 1)] = full2Ans.charAt(a);
-		$("#ct" + (a + 1)).html(full2Ans[a]);
-
-		if (a == (full2Ans.length - 1)) {
-			letterClick();
-		}
-	}
-
-	if (localStorage.getItem("animeHint") == null) {
-		hint = 0; localStorage.setItem("animeHint", hint);
-	} else {
-		hint = parseInt(localStorage.getItem("animeHint"));
-	}
-
-
-	function AppendHint() {
-		if (hint > 0) {
-			for (let hi = 0; hi <= hint; hi++) {
-				$("#ans" + hi).html(full2Ans.charAt(hi - 1));
-				$("#ans-ct" + hi).css({ backgroundColor: 'green', color: 'white' });
-			}
-			for (i = 0; i < hint; i++) {
-				typedAns += full2Ans[i];
-				console.log(hint);
-				typedAnsNumbers.push(i + 1);
-				$("#ct" + (i + 1)).css({ visibility: 'hidden' });
-			}
-		}
-	}
-	AppendHint();
-
-	digit = hint + 1;
-	totaldigit = hint + 1;
-
-	if (hint == full2Ans.length - 1) {
-		$(".show-hint").css({ visibility: 'hidden' });
-	}
-
-	MainShuffle();
-
-	vhHeight = $(window).outerHeight();
-	fullHeight = $(".full").outerHeight();
-	calcHeight = vhHeight - fullHeight;
-	$(".letters-bg").css({ height: '' + (calcHeight - 10) });
-
-}
-AppenAll();
 
 $('.clear-all').click(function () {
 	fullAns = window['q' + levels];
@@ -459,6 +522,10 @@ function finalCheck() {
 				$('.finish-con').css({ display: 'flex' });
 				document.getElementById("finish").play();
 				coins++;
+
+				$(".tile").css({visibility:'hidden'});
+				tile_list = []
+				localStorage.animeMovieTileList = JSON.stringify(tile_list);
 			} else {
 				$('.game-over-con').css({ display: 'flex' });
 				document.getElementById("over").play();
